@@ -1,4 +1,6 @@
+import { status } from "http-status";
 import { Logger } from "../config/index.js";
+import AppError from "../utils/errors/app-error.js";
 
 class CrudRepository {
   constructor(model) {
@@ -8,7 +10,6 @@ class CrudRepository {
 
   async create(data) {
     try {
-      console.log("Data in CrudRepository create method:", data);
       if (!data) {
         throw new Error("Data is undefined");
       }
@@ -21,51 +22,35 @@ class CrudRepository {
   }
 
   async destory(data) {
-    try {
-      return await this.model.destroy({
-        where: {
-          id: data.id,
-        },
-      });
-    } catch (error) {
-      Logger.error(error);
-      throw error;
-    }
+    return await this.model.destroy({
+      where: {
+        id: data.id,
+      },
+    });
   }
 
   async get(data) {
-    try {
-      return await this.model.findByPk({
-        where: {
-          id: data.id,
-        },
-      });
-    } catch (error) {
-      Logger.error(error);
-      throw error;
+    const response = await this.model.findByPk(data);
+    if (!response) {
+      throw new AppError(
+        "Cannot find airplane with given id",
+        status.NOT_FOUND
+      );
     }
+
+    return response;
   }
 
   async getAll() {
-    try {
-      return await this.model.findAll();
-    } catch (error) {
-      Logger.error(error);
-      throw error;
-    }
+    return await this.model.findAll();
   }
 
   async update(id, data) {
-    try {
-      return await this.model.update(data, {
-        where: {
-          id: id,
-        },
-      });
-    } catch (error) {
-      Logger.error(error);
-      throw error;
-    }
+    return await this.model.update(data, {
+      where: {
+        id: id,
+      },
+    });
   }
 }
 

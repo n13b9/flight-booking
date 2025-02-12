@@ -4,7 +4,6 @@ import { ErrorResponse, SuccessResponse } from "../utils/common/index.js";
 
 async function createAirplane(req, res) {
   try {
-    console.log("inside controller", req.body);
     const airplane = await AirplaneService.createAirplane({
       modelNumber: req.body.modelNumber,
       capacity: req.body.capacity,
@@ -17,4 +16,30 @@ async function createAirplane(req, res) {
   }
 }
 
-export default { createAirplane };
+async function getAirplanes(req, res) {
+  try {
+    console.log("inside controller", req.body);
+    const airplanes = await AirplaneService.getAirplanes();
+    SuccessResponse.data = airplanes;
+    return res.status(Status.OK).json(SuccessResponse);
+  } catch (error) {
+    ErrorResponse.error = error;
+    return res.status(Status.INTERNAL_SERVER_ERROR).json(ErrorResponse);
+  }
+}
+
+// POST /airplanes/:id
+
+async function getAirplane(req, res) {
+  console.log("inside controllerrrr");
+  try {
+    const airplane = await AirplaneService.getAirplane(req.params.id);
+    SuccessResponse.data = airplane;
+    return res.status(Status.OK).json(SuccessResponse);
+  } catch (error) {
+    ErrorResponse.error = error;
+    return res.status(Status.INTERNAL_SERVER_ERROR).json(ErrorResponse);
+  }
+}
+
+export default { createAirplane, getAirplanes, getAirplane };

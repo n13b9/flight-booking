@@ -7,6 +7,13 @@ const router = express.Router();
 
 console.log("inside airplane routes");
 
-router.post("/", AirplaneController.createAirplane);
+router.post(
+  "/",
+  AirplaneMiddlewares.validateCreateRequest,
+  AirplaneController.createAirplane
+);
+
+router.get("/", AirplaneController.getAirplanes);
+router.get("/:id", AirplaneController.getAirplane);
 
 export default router;
