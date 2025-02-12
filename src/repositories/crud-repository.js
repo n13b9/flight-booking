@@ -22,11 +22,16 @@ class CrudRepository {
   }
 
   async destory(data) {
-    return await this.model.destroy({
-      where: {
-        id: data.id,
-      },
+    const response = await this.model.destroy({
+      where: { id: data },
     });
+    if (!response) {
+      throw new AppError(
+        "Cannot find airplane with given id",
+        status.NOT_FOUND
+      );
+    }
+    return response;
   }
 
   async get(data) {

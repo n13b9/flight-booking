@@ -53,5 +53,16 @@ async function getAirplane(id) {
     );
   }
 }
+async function destroyAirplane(id) {
+  try {
+    const response = await airplaneRepository.destory(id);
+    return response;
+  } catch (error) {
+    if (error.status === status.NOT_FOUND) {
+      throw new AppError("cannot delete airplane", status.NOT_FOUND);
+    }
+    throw new AppError("cannot delete airplane", status.NOT_FOUND);
+  }
+}
 
-export default { createAirplane, getAirplanes, getAirplane };
+export default { createAirplane, getAirplanes, getAirplane, destroyAirplane };

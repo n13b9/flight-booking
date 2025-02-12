@@ -42,4 +42,16 @@ async function getAirplane(req, res) {
   }
 }
 
-export default { createAirplane, getAirplanes, getAirplane };
+// DELETE /airplanes/:id
+
+async function destroyAirplane(req, res) {
+  try {
+    const airplane = await AirplaneService.destroyAirplane(req.params.id);
+    SuccessResponse.data = airplane;
+    return res.status(Status.OK).json(SuccessResponse);
+  } catch (error) {
+    ErrorResponse.error = error;
+    return res.status(Status.INTERNAL_SERVER_ERROR).json(ErrorResponse);
+  }
+}
+export default { createAirplane, getAirplanes, getAirplane, destroyAirplane };
