@@ -1,14 +1,13 @@
 import Status from "http-status";
-import { AirplaneService } from "../services/index.js";
+import { CityService } from "../services/index.js";
 import { ErrorResponse, SuccessResponse } from "../utils/common/index.js";
 
-async function createAirplane(req, res) {
+async function createCity(req, res) {
   try {
-    const airplane = await AirplaneService.createAirplane({
-      modelNumber: req.body.modelNumber,
-      capacity: req.body.capacity,
+    const city = await CityService.createCity({
+      name: req.body.name,
     });
-    SuccessResponse.data = airplane;
+    SuccessResponse.data = city;
     return res.status(Status.CREATED).json(SuccessResponse);
   } catch (error) {
     ErrorResponse.error = error;
@@ -16,10 +15,10 @@ async function createAirplane(req, res) {
   }
 }
 
-async function getAirplanes(req, res) {
+async function getCities(req, res) {
   try {
-    const airplanes = await AirplaneService.getAirplanes();
-    SuccessResponse.data = airplanes;
+    const cities = await CityService.getCities();
+    SuccessResponse.data = cities;
     return res.status(Status.OK).json(SuccessResponse);
   } catch (error) {
     ErrorResponse.error = error;
@@ -27,13 +26,10 @@ async function getAirplanes(req, res) {
   }
 }
 
-// POST /airplanes/:id
-
-async function getAirplane(req, res) {
-  console.log("inside controllerrrr");
+async function getCity(req, res) {
   try {
-    const airplane = await AirplaneService.getAirplane(req.params.id);
-    SuccessResponse.data = airplane;
+    const city = await CityService.getCity(req.params.id);
+    SuccessResponse.data = city;
     return res.status(Status.OK).json(SuccessResponse);
   } catch (error) {
     ErrorResponse.error = error;
@@ -41,16 +37,20 @@ async function getAirplane(req, res) {
   }
 }
 
-// DELETE /airplanes/:id
-
-async function destroyAirplane(req, res) {
+async function destroyCity(req, res) {
   try {
-    const airplane = await AirplaneService.destroyAirplane(req.params.id);
-    SuccessResponse.data = airplane;
+    const city = await CityService.destroyCity(req.params.id);
+    SuccessResponse.data = city;
     return res.status(Status.OK).json(SuccessResponse);
   } catch (error) {
     ErrorResponse.error = error;
     return res.status(Status.INTERNAL_SERVER_ERROR).json(ErrorResponse);
   }
 }
-export default { createAirplane, getAirplanes, getAirplane, destroyAirplane };
+
+export default {
+  createCity,
+  getCities,
+  getCity,
+  destroyCity,
+};

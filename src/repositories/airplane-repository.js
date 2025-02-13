@@ -8,7 +8,6 @@ import db from "../models/index.js";
 class AirplaneRepository extends CrudRepository {
   constructor() {
     super(db.Airplane);
-    console.log(db.Airplane, "inside aiple repository");
   }
 }
 

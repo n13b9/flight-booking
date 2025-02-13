@@ -26,10 +26,7 @@ class CrudRepository {
       where: { id: data },
     });
     if (!response) {
-      throw new AppError(
-        "Cannot find airplane with given id",
-        status.NOT_FOUND
-      );
+      throw new AppError("Cannot find city with given id", status.NOT_FOUND);
     }
     return response;
   }
@@ -37,10 +34,7 @@ class CrudRepository {
   async get(data) {
     const response = await this.model.findByPk(data);
     if (!response) {
-      throw new AppError(
-        "Cannot find airplane with given id",
-        status.NOT_FOUND
-      );
+      throw new AppError("Cannot find city with given id", status.NOT_FOUND);
     }
 
     return response;

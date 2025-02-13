@@ -1,12 +1,10 @@
 import express from "express";
-import InfoController from "../../controllers/info-controller.js";
 import airplaneRoutes from "./airplane-routes.js";
+import cityRoutes from "./city-routes.js";
 
 const router = express.Router();
 
-// router.get("/info", InfoController.info);
-
-console.log("inside v1 routes");
 router.use("/airplanes", airplaneRoutes);
+router.use("/cities", cityRoutes);
 
 export default router;

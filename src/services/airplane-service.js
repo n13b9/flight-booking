@@ -1,4 +1,4 @@
-import AirplaneRepository from "../repositories/airplane-repository.js";
+import { AirplaneRepository } from "../repositories/index.js";
 import status from "http-status";
 import AppError from "../utils/errors/app-error.js";
 
@@ -6,7 +6,6 @@ const airplaneRepository = new AirplaneRepository();
 
 async function createAirplane(data) {
   try {
-    // console.log("inside service", data);
     const response = await airplaneRepository.create(data);
     return response;
   } catch (error) {
