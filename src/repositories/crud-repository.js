@@ -5,7 +5,6 @@ import AppError from "../utils/errors/app-error.js";
 class CrudRepository {
   constructor(model) {
     this.model = model;
-    console.log("Model in CrudRepository:", this.model);
   }
 
   async create(data) {

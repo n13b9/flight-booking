@@ -5,8 +5,6 @@ import { AirplaneMiddlewares } from "../../middlewares/index.js";
 
 const router = express.Router();
 
-console.log("inside airplane routes");
-
 router.post(
   "/",
   AirplaneMiddlewares.validateCreateRequest,

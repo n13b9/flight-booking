@@ -6,6 +6,6 @@ import { FlightController } from "../../controllers/index.js";
 const router = express.Router();
 
 router.post("/", FlightController.createFlight);
-// router.get("/", FlightController.getFlights);
+router.get("/", FlightController.getAllFlights);
 
 export default router;

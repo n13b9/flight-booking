@@ -30,7 +30,6 @@ async function getAirplanes(req, res) {
 // POST /airplanes/:id
 
 async function getAirplane(req, res) {
-  console.log("inside controllerrrr");
   try {
     const airplane = await AirplaneService.getAirplane(req.params.id);
     SuccessResponse.data = airplane;

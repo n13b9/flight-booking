@@ -14,8 +14,8 @@ export default (sequelize, DataTypes) => {
     static associate(models) {
       // define association here
       this.belongsTo(models.Airplane, { foreignKey: "airplaneId" });
-      this.belongsTo(models.Airport, { foreignKey: "code" });
-      this.belongsTo(models.Airport, { foreignKey: "code" });
+      this.belongsTo(models.Airport, { foreignKey: "depertureAirportId" });
+      this.belongsTo(models.Airport, { foreignKey: "arrivalAirportId" });
     }
   }
   Flight.init(

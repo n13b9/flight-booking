@@ -6,7 +6,6 @@ const cityRepository = new CityRepository();
 
 async function createCity(data) {
   try {
-    console.log("inside city service datt", data);
     const response = await cityRepository.create(data);
     return response;
   } catch (error) {
