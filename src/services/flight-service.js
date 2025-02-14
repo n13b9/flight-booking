@@ -79,12 +79,10 @@ async function getAllFlights(query) {
   }
 
   try {
-    console.log(customFilter, sortFilter, "here");
     const response = await flightRepository.getAllFlights(
       customFilter,
       sortFilter
     );
-    console.log("Fetched flights:", response);
     return response;
   } catch (error) {
     console.error("Error fetching flights:", error);

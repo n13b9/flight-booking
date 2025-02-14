@@ -4,7 +4,7 @@
 import { Model, DataTypes } from "sequelize";
 
 export default (sequelize, DataTypes) => {
-  class Airplane extends Model {
+  class Seat extends Model {
     /**
      * Helper method for defining associations.
      * This method is not a part of Sequelize lifecycle.
@@ -12,33 +12,27 @@ export default (sequelize, DataTypes) => {
      */
     static associate(models) {
       // define association here
-      this.hasMany(models.Flight, {
+      this.belongsTo(models.Airplane, {
         foreignKey: "airplaneId",
-        onDelete: "CASCADE",
-      });
-      this.hasMany(models.Seat, {
-        foreignKey: "airplaneId",
-        onDelete: "CASCADE",
       });
     }
   }
-  Airplane.init(
+  Seat.init(
     {
-      modelNumber: {
-        type: DataTypes.STRING,
+      row: { type: DataTypes.INTEGER, allowNull: false },
+      col: { type: DataTypes.STRING, allowNull: false },
+      airplaneId: { type: DataTypes.INTEGER, allowNull: false },
+      type: {
+        type: DataTypes.ENUM,
+        values: ["BUSINESS", "ECONOMY", "FIRST", "PREMIUM_ECONOMY"],
+        defaultValue: "ECONOMY",
         allowNull: false,
-        validate: { isAlphanumeric: true },
-      },
-      capacity: {
-        type: DataTypes.INTEGER,
-        allowNull: false,
-        validate: { max: 1000 },
       },
     },
     {
       sequelize,
-      modelName: "Airplane",
+      modelName: "Seat",
     }
   );
-  return Airplane;
+  return Seat;
 };

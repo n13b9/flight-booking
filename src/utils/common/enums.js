@@ -1,0 +1,8 @@
+const SEAT_TYPES = {
+  ECONOMY: "ECONOMY",
+  PREMIUM_ECONOMY: "PREMIUM_ECONOMY",
+  BUSINESS: "BUSINESS",
+  FIRST: "FIRST",
+};
+
+export default { SEAT_TYPES };
